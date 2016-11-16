@@ -15,7 +15,6 @@ function getGeo() {
     navigator.geolocation.getCurrentPosition(function(position) {
       res({lat: position.coords.latitude, long: position.coords.longitude})
     }, function() {
-      console.log('did not get your position')
       rej('error')
     });
   })
