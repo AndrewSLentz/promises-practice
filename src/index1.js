@@ -10,11 +10,18 @@ https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 
 **/
 
-function getGeo(){
-    // ...
+function getGeo() {
+  return new Promise(function(res, rej) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      res({lat: position.coords.latitude, long: position.coords.longitude})
+    }, function() {
+      console.log('did not get your position')
+      rej('error')
+    });
+  })
 }
 
-getGeo.then(function(coords) {
+getGeo().then(function(coords) {
   console.log('IF YOU DO NOT SEE ME IN CONSOLE, SOMETHING IS BROKEN');
   console.assert(typeof coords.lat === 'number');
   console.assert(typeof coords.long === 'number');
